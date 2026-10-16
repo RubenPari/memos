@@ -413,6 +413,15 @@ func (s *ConnectServiceHandler) DeleteMemo(ctx context.Context, req *connect.Req
 	return connect.NewResponse(resp), nil
 }
 
+// RenameMemoTag renames the tag in the authenticated user's memos.
+func (s *ConnectServiceHandler) RenameMemoTag(ctx context.Context, req *connect.Request[apipb.RenameMemoTagRequest]) (*connect.Response[emptypb.Empty], error) {
+	resp, err := s.APIService.RenameMemoTag(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
 func (s *ConnectServiceHandler) SetMemoAttachments(ctx context.Context, req *connect.Request[apipb.SetMemoAttachmentsRequest]) (*connect.Response[emptypb.Empty], error) {
 	resp, err := s.APIService.SetMemoAttachments(ctx, req.Msg)
 	if err != nil {

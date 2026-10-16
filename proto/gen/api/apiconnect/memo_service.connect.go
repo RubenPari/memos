@@ -44,6 +44,9 @@ const (
 	MemoServiceUpdateMemoProcedure = "/memos.api.MemoService/UpdateMemo"
 	// MemoServiceDeleteMemoProcedure is the fully-qualified name of the MemoService's DeleteMemo RPC.
 	MemoServiceDeleteMemoProcedure = "/memos.api.MemoService/DeleteMemo"
+	// MemoServiceRenameMemoTagProcedure is the fully-qualified name of the MemoService's RenameMemoTag
+	// RPC.
+	MemoServiceRenameMemoTagProcedure = "/memos.api.MemoService/RenameMemoTag"
 	// MemoServiceListMemoAttachmentsProcedure is the fully-qualified name of the MemoService's
 	// ListMemoAttachments RPC.
 	MemoServiceListMemoAttachmentsProcedure = "/memos.api.MemoService/ListMemoAttachments"
@@ -109,6 +112,12 @@ type MemoServiceClient interface {
 	// replies and their owned resources. It removes incident relations for all
 	// deleted memos. Requires the memo creator or an instance administrator.
 	DeleteMemo(context.Context, *connect.Request[api.DeleteMemoRequest]) (*connect.Response[emptypb.Empty], error)
+	// RenameMemoTag renames a tag in the authenticated user's memos. With
+	// parent "memos/-" it renames the tag in every memo the caller owns; with
+	// "memos/{memo}" it renames only in that memo, which the caller must own.
+	// Memos that do not contain the tag are unchanged. Renaming to a tag that
+	// already exists merges the two tags. Requires authentication.
+	RenameMemoTag(context.Context, *connect.Request[api.RenameMemoTagRequest]) (*connect.Response[emptypb.Empty], error)
 	// ListMemoAttachments lists the attachments of a memo. Requires read access
 	// to the memo.
 	ListMemoAttachments(context.Context, *connect.Request[api.ListMemoAttachmentsRequest]) (*connect.Response[api.ListMemoAttachmentsResponse], error)
@@ -200,6 +209,12 @@ func NewMemoServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			httpClient,
 			baseURL+MemoServiceDeleteMemoProcedure,
 			connect.WithSchema(memoServiceMethods.ByName("DeleteMemo")),
+			connect.WithClientOptions(opts...),
+		),
+		renameMemoTag: connect.NewClient[api.RenameMemoTagRequest, emptypb.Empty](
+			httpClient,
+			baseURL+MemoServiceRenameMemoTagProcedure,
+			connect.WithSchema(memoServiceMethods.ByName("RenameMemoTag")),
 			connect.WithClientOptions(opts...),
 		),
 		listMemoAttachments: connect.NewClient[api.ListMemoAttachmentsRequest, api.ListMemoAttachmentsResponse](
@@ -302,6 +317,7 @@ type memoServiceClient struct {
 	createMemo           *connect.Client[api.CreateMemoRequest, api.Memo]
 	updateMemo           *connect.Client[api.UpdateMemoRequest, api.Memo]
 	deleteMemo           *connect.Client[api.DeleteMemoRequest, emptypb.Empty]
+	renameMemoTag        *connect.Client[api.RenameMemoTagRequest, emptypb.Empty]
 	listMemoAttachments  *connect.Client[api.ListMemoAttachmentsRequest, api.ListMemoAttachmentsResponse]
 	setMemoAttachments   *connect.Client[api.SetMemoAttachmentsRequest, emptypb.Empty]
 	listMemoRelations    *connect.Client[api.ListMemoRelationsRequest, api.ListMemoRelationsResponse]
@@ -342,6 +358,11 @@ func (c *memoServiceClient) UpdateMemo(ctx context.Context, req *connect.Request
 // DeleteMemo calls memos.api.MemoService.DeleteMemo.
 func (c *memoServiceClient) DeleteMemo(ctx context.Context, req *connect.Request[api.DeleteMemoRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteMemo.CallUnary(ctx, req)
+}
+
+// RenameMemoTag calls memos.api.MemoService.RenameMemoTag.
+func (c *memoServiceClient) RenameMemoTag(ctx context.Context, req *connect.Request[api.RenameMemoTagRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.renameMemoTag.CallUnary(ctx, req)
 }
 
 // ListMemoAttachments calls memos.api.MemoService.ListMemoAttachments.
@@ -437,6 +458,12 @@ type MemoServiceHandler interface {
 	// replies and their owned resources. It removes incident relations for all
 	// deleted memos. Requires the memo creator or an instance administrator.
 	DeleteMemo(context.Context, *connect.Request[api.DeleteMemoRequest]) (*connect.Response[emptypb.Empty], error)
+	// RenameMemoTag renames a tag in the authenticated user's memos. With
+	// parent "memos/-" it renames the tag in every memo the caller owns; with
+	// "memos/{memo}" it renames only in that memo, which the caller must own.
+	// Memos that do not contain the tag are unchanged. Renaming to a tag that
+	// already exists merges the two tags. Requires authentication.
+	RenameMemoTag(context.Context, *connect.Request[api.RenameMemoTagRequest]) (*connect.Response[emptypb.Empty], error)
 	// ListMemoAttachments lists the attachments of a memo. Requires read access
 	// to the memo.
 	ListMemoAttachments(context.Context, *connect.Request[api.ListMemoAttachmentsRequest]) (*connect.Response[api.ListMemoAttachmentsResponse], error)
@@ -524,6 +551,12 @@ func NewMemoServiceHandler(svc MemoServiceHandler, opts ...connect.HandlerOption
 		MemoServiceDeleteMemoProcedure,
 		svc.DeleteMemo,
 		connect.WithSchema(memoServiceMethods.ByName("DeleteMemo")),
+		connect.WithHandlerOptions(opts...),
+	)
+	memoServiceRenameMemoTagHandler := connect.NewUnaryHandler(
+		MemoServiceRenameMemoTagProcedure,
+		svc.RenameMemoTag,
+		connect.WithSchema(memoServiceMethods.ByName("RenameMemoTag")),
 		connect.WithHandlerOptions(opts...),
 	)
 	memoServiceListMemoAttachmentsHandler := connect.NewUnaryHandler(
@@ -628,6 +661,8 @@ func NewMemoServiceHandler(svc MemoServiceHandler, opts ...connect.HandlerOption
 			memoServiceUpdateMemoHandler.ServeHTTP(w, r)
 		case MemoServiceDeleteMemoProcedure:
 			memoServiceDeleteMemoHandler.ServeHTTP(w, r)
+		case MemoServiceRenameMemoTagProcedure:
+			memoServiceRenameMemoTagHandler.ServeHTTP(w, r)
 		case MemoServiceListMemoAttachmentsProcedure:
 			memoServiceListMemoAttachmentsHandler.ServeHTTP(w, r)
 		case MemoServiceSetMemoAttachmentsProcedure:
@@ -685,6 +720,10 @@ func (UnimplementedMemoServiceHandler) UpdateMemo(context.Context, *connect.Requ
 
 func (UnimplementedMemoServiceHandler) DeleteMemo(context.Context, *connect.Request[api.DeleteMemoRequest]) (*connect.Response[emptypb.Empty], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.MemoService.DeleteMemo is not implemented"))
+}
+
+func (UnimplementedMemoServiceHandler) RenameMemoTag(context.Context, *connect.Request[api.RenameMemoTagRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.MemoService.RenameMemoTag is not implemented"))
 }
 
 func (UnimplementedMemoServiceHandler) ListMemoAttachments(context.Context, *connect.Request[api.ListMemoAttachmentsRequest]) (*connect.Response[api.ListMemoAttachmentsResponse], error) {

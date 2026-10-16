@@ -93,7 +93,9 @@ describe("TagsSection", () => {
     const path = alpha.parentElement?.parentElement as HTMLSpanElement;
     const count = screen.getByText("2");
 
-    expect(alphaButton).toHaveClass(...SIDEBAR_ROW_BOX_CLASSES.split(" "));
+    // The row box wraps the label button plus the trailing rename menu,
+    // following the same split-row grammar as sidebar views.
+    expect(alphaButton.parentElement).toHaveClass(...SIDEBAR_ROW_BOX_CLASSES.split(" "));
     // The # sits in the same fixed slot the tree uses, so switching modes keeps it in place.
     expect(alphaButton.firstElementChild).toHaveClass(...SIDEBAR_ROW_SLOT_CLASSES.split(" "));
     expect(path).toHaveClass("truncate", "text-start");

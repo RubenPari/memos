@@ -59,6 +59,19 @@ service MemoService {
     option (google.api.method_signature) = "name";
   }
 
+  // RenameMemoTag renames a tag in the authenticated user's memos. With
+  // parent "memos/-" it renames the tag in every memo the caller owns; with
+  // "memos/{memo}" it renames only in that memo, which the caller must own.
+  // Memos that do not contain the tag are unchanged. Renaming to a tag that
+  // already exists merges the two tags. Requires authentication.
+  rpc RenameMemoTag(RenameMemoTagRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/{parent=memos/*}/tags:rename"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,old_tag,new_tag";
+  }
+
   // ListMemoAttachments lists the attachments of a memo. Requires read access
   // to the memo.
   rpc ListMemoAttachments(ListMemoAttachmentsRequest) returns (ListMemoAttachmentsResponse) {
@@ -401,6 +414,22 @@ message DeleteMemoRequest {
   // Optional. Currently ignored by the server; deletion always includes the
   // comment subtree.
   bool force = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Request message for MemoService.RenameMemoTag.
+message RenameMemoTagRequest {
+  // Required. The parent who owns the tags.
+  // Format: memos/{memo}. Use "memos/-" to rename in all of the caller's memos.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "memos.api/Memo"}
+  ];
+
+  // Required. The current tag name, without the leading '#'.
+  string old_tag = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The new tag name, without the leading '#'.
+  string new_tag = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Location is a geographic location attached to a memo.

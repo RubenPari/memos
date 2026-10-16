@@ -1088,6 +1088,14 @@
     "spaces": "Spaces",
     "switch": "Switch space"
   },
+  "tag": {
+    "new-name": "New tag name",
+    "rename-error-empty": "Tag name must not be empty or contain spaces",
+    "rename-error-repeat": "The new tag name must differ from the current one",
+    "rename-merge-hint": "Renaming to an existing tag merges the two tags in all of your memos.",
+    "rename-success": "Tag renamed successfully",
+    "rename-tag": "Rename tag"
+  },
   "tooltip": {
     "link-memo": "Link Memo",
     "select-location": "Location"

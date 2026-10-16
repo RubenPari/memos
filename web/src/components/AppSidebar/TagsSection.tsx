@@ -1,11 +1,13 @@
-import { HashIcon, ListTreeIcon, MoreHorizontalIcon } from "lucide-react";
-import { forwardRef, useMemo } from "react";
+import { HashIcon, ListTreeIcon, MoreHorizontalIcon, PencilIcon } from "lucide-react";
+import { forwardRef, useMemo, useState } from "react";
+import RenameTagDialog from "@/components/RenameTagDialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -16,8 +18,10 @@ import { cn } from "@/lib/utils";
 import { useTranslate } from "@/utils/i18n";
 import TagTree, { tagRowAriaLabel } from "../TagTree";
 import {
-  SIDEBAR_ROW_CLASSES,
+  SIDEBAR_ROW_BOX_CLASSES,
   SIDEBAR_ROW_COUNT_RAIL_CLASSES,
+  SIDEBAR_ROW_LABEL_CLASSES,
+  SIDEBAR_ROW_SLOT_BUTTON_CLASSES,
   SidebarRowIconSlot,
   sidebarRowStateAttributes,
   sidebarRowStateClasses,
@@ -54,27 +58,54 @@ interface FlatTagRowProps {
   /** Computed by the parent, which already holds the translator — rows stay subscription-free. */
   ariaLabel: string;
   onClick: () => void;
+  onRename: (tag: string) => void;
 }
 
-const FlatTagRow = ({ tag, amount, active, ariaLabel, onClick }: FlatTagRowProps) => {
+const FlatTagRow = ({ tag, amount, active, ariaLabel, onClick, onRename }: FlatTagRowProps) => {
+  const t = useTranslate();
   const { ref, title } = useOverflowTitle<HTMLSpanElement>(`#${tag}`);
   const state = active ? "checked" : "idle";
 
   return (
-    <button
-      type="button"
-      aria-label={ariaLabel}
-      aria-pressed={active || undefined}
-      title={title}
-      {...sidebarRowStateAttributes(state)}
-      className={cn(SIDEBAR_ROW_CLASSES, sidebarRowStateClasses(state))}
-      onClick={onClick}
-    >
-      {/* Same leading slot as the tree, so the # marks hold their line when switching modes. */}
-      <SidebarRowIconSlot icon={HashIcon} />
-      <TagPath ref={ref} tag={tag} />
-      <span className={SIDEBAR_ROW_COUNT_RAIL_CLASSES}>{amount}</span>
-    </button>
+    <div {...sidebarRowStateAttributes(state)} className={cn(SIDEBAR_ROW_BOX_CLASSES, "group/tag", sidebarRowStateClasses(state))}>
+      <button
+        type="button"
+        aria-label={ariaLabel}
+        aria-pressed={active || undefined}
+        title={title}
+        className={SIDEBAR_ROW_LABEL_CLASSES}
+        onClick={onClick}
+      >
+        {/* Same leading slot as the tree, so the # marks hold their line when switching modes. */}
+        <SidebarRowIconSlot icon={HashIcon} />
+        <TagPath ref={ref} tag={tag} />
+        <span className={SIDEBAR_ROW_COUNT_RAIL_CLASSES}>{amount}</span>
+      </button>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton={false}
+          render={
+            <span
+              role="button"
+              tabIndex={0}
+              aria-label={`${t("tag.rename-tag")}: #${tag}`}
+              className={cn(
+                SIDEBAR_ROW_SLOT_BUTTON_CLASSES,
+                "text-muted-foreground transition-opacity md:opacity-0 md:group-hover/tag:opacity-100 md:focus-visible:opacity-100 data-popup-open:opacity-100",
+              )}
+            />
+          }
+        >
+          <MoreHorizontalIcon className="size-3.5" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" sideOffset={2} size="sm">
+          <DropdownMenuItem onClick={() => onRename(tag)}>
+            <PencilIcon className="text-muted-foreground" strokeWidth={1.8} />
+            {t("tag.rename-tag")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };
 
@@ -82,6 +113,7 @@ const TagsSection = ({ tagCount, onSelect, scope }: Props) => {
   const t = useTranslate();
   const { getFiltersByFactor, addFilter, removeFilter } = useMemoFilterContext();
   const [treeMode, setTreeMode] = useLocalStorage<boolean>("tag-view-as-tree", false);
+  const [renameTarget, setRenameTarget] = useState<string>();
   const activeTags = new Set(getFiltersByFactor("tagSearch").map((filter) => filter.value));
   const activeTag = activeTags.values().next().value as string | undefined;
   const tags = useMemo(() => Object.entries(tagCount).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])), [tagCount]);
@@ -89,6 +121,13 @@ const TagsSection = ({ tagCount, onSelect, scope }: Props) => {
   if (tags.length === 0) {
     return null;
   }
+
+  const handleRenameSuccess = (oldTag: string, newTag: string) => {
+    if (activeTags.has(oldTag)) {
+      removeFilter((filter) => filter.factor === "tagSearch" && filter.value === oldTag);
+      addFilter({ factor: "tagSearch", value: newTag });
+    }
+  };
 
   const handleTagClick = (tag: string) => {
     const active = activeTags.has(tag);
@@ -135,7 +174,14 @@ const TagsSection = ({ tagCount, onSelect, scope }: Props) => {
       }
     >
       {treeMode ? (
-        <TagTree key={scope} tagAmounts={tags} activeTag={activeTag} scope={scope} onTagClick={handleTagClick} />
+        <TagTree
+          key={scope}
+          tagAmounts={tags}
+          activeTag={activeTag}
+          scope={scope}
+          onTagClick={handleTagClick}
+          onRenameTag={setRenameTarget}
+        />
       ) : (
         <>
           {tags.map(([tag, amount]) => (
@@ -146,9 +192,18 @@ const TagsSection = ({ tagCount, onSelect, scope }: Props) => {
               active={activeTags.has(tag)}
               ariaLabel={tagRowAriaLabel(t, tag, amount)}
               onClick={() => handleTagClick(tag)}
+              onRename={setRenameTarget}
             />
           ))}
         </>
+      )}
+      {renameTarget && (
+        <RenameTagDialog
+          open
+          onOpenChange={(open) => !open && setRenameTarget(undefined)}
+          tag={renameTarget}
+          onSuccess={(newTag) => handleRenameSuccess(renameTarget, newTag)}
+        />
       )}
     </SidebarSection>
   );

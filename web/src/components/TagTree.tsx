@@ -1,4 +1,4 @@
-import { ChevronRightIcon, HashIcon } from "lucide-react";
+import { ChevronRightIcon, HashIcon, MoreHorizontalIcon, PencilIcon } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import {
   SIDEBAR_ROW_BOX_CLASSES,
@@ -11,6 +11,7 @@ import {
   sidebarRowStateAttributes,
   sidebarRowStateClasses,
 } from "@/components/AppSidebar/SidebarRow";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useLocalStorage, useOverflowTitle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { useTranslate } from "@/utils/i18n";
@@ -31,6 +32,7 @@ interface Props {
   /** Identifies whose tags these are, so expansion persists per tenant rather than per browser. */
   scope: string;
   onTagClick: (tag: string) => void;
+  onRenameTag?: (tag: string) => void;
 }
 
 /** Persisted per scope: which branches are open, and the selection already revealed. */
@@ -111,9 +113,10 @@ interface TagItemProps {
   expanded: ReadonlySet<string>;
   onTagClick: (tag: string) => void;
   onToggle: (path: string) => void;
+  onRenameTag?: (tag: string) => void;
 }
 
-const TagItem = ({ tag, depth, activeTag, expanded, onTagClick, onToggle }: TagItemProps) => {
+const TagItem = ({ tag, depth, activeTag, expanded, onTagClick, onToggle, onRenameTag }: TagItemProps) => {
   const t = useTranslate();
   const isTag = tag.amount !== undefined;
   const isActive = activeTag === tag.text;
@@ -171,7 +174,34 @@ const TagItem = ({ tag, depth, activeTag, expanded, onTagClick, onToggle }: TagI
             </span>
             <span className={SIDEBAR_ROW_COUNT_RAIL_CLASSES}>{tag.amount}</span>
           </button>
-        ) : (
+        ) : null}
+        {isTag && onRenameTag && (
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              nativeButton={false}
+              render={
+                <span
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${t("tag.rename-tag")}: #${tag.text}`}
+                  className={cn(
+                    SIDEBAR_ROW_SLOT_BUTTON_CLASSES,
+                    "text-muted-foreground transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100 data-popup-open:opacity-100",
+                  )}
+                />
+              }
+            >
+              <MoreHorizontalIcon className="size-3.5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" sideOffset={2} size="sm">
+              <DropdownMenuItem onClick={() => onRenameTag(tag.text)}>
+                <PencilIcon className="text-muted-foreground" strokeWidth={1.8} />
+                {t("tag.rename-tag")}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+        {!isTag && (
           // A structural segment only exists to reach its children, so the whole row is the
           // disclosure — one control, rather than a row and a chevron doing the same thing.
           <button
@@ -204,6 +234,7 @@ const TagItem = ({ tag, depth, activeTag, expanded, onTagClick, onToggle }: TagI
               expanded={expanded}
               onTagClick={onTagClick}
               onToggle={onToggle}
+              onRenameTag={onRenameTag}
             />
           ))}
         </div>
@@ -212,7 +243,7 @@ const TagItem = ({ tag, depth, activeTag, expanded, onTagClick, onToggle }: TagI
   );
 };
 
-const TagTree = ({ tagAmounts, activeTag, scope, onTagClick }: Props) => {
+const TagTree = ({ tagAmounts, activeTag, scope, onTagClick, onRenameTag }: Props) => {
   const t = useTranslate();
   const tags = useMemo(() => buildTagTree(tagAmounts), [tagAmounts]);
   // Scoped per tenant: the paths are one account's tag names, so another user's profile tree
@@ -254,6 +285,7 @@ const TagTree = ({ tagAmounts, activeTag, scope, onTagClick }: Props) => {
           expanded={expanded}
           onTagClick={onTagClick}
           onToggle={handleToggle}
+          onRenameTag={onRenameTag}
         />
       ))}
     </div>

@@ -135,7 +135,7 @@ func (x MemoRelation_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MemoRelation_Type.Descriptor instead.
 func (MemoRelation_Type) EnumDescriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{11, 0}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{12, 0}
 }
 
 // Memo is a Markdown note written by a user.
@@ -735,6 +735,71 @@ func (x *DeleteMemoRequest) GetForce() bool {
 	return false
 }
 
+// Request message for MemoService.RenameMemoTag.
+type RenameMemoTagRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The parent who owns the tags.
+	// Format: memos/{memo}. Use "memos/-" to rename in all of the caller's memos.
+	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	// Required. The current tag name, without the leading '#'.
+	OldTag string `protobuf:"bytes,2,opt,name=old_tag,json=oldTag,proto3" json:"old_tag,omitempty"`
+	// Required. The new tag name, without the leading '#'.
+	NewTag        string `protobuf:"bytes,3,opt,name=new_tag,json=newTag,proto3" json:"new_tag,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RenameMemoTagRequest) Reset() {
+	*x = RenameMemoTagRequest{}
+	mi := &file_api_memo_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RenameMemoTagRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenameMemoTagRequest) ProtoMessage() {}
+
+func (x *RenameMemoTagRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_memo_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenameMemoTagRequest.ProtoReflect.Descriptor instead.
+func (*RenameMemoTagRequest) Descriptor() ([]byte, []int) {
+	return file_api_memo_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *RenameMemoTagRequest) GetParent() string {
+	if x != nil {
+		return x.Parent
+	}
+	return ""
+}
+
+func (x *RenameMemoTagRequest) GetOldTag() string {
+	if x != nil {
+		return x.OldTag
+	}
+	return ""
+}
+
+func (x *RenameMemoTagRequest) GetNewTag() string {
+	if x != nil {
+		return x.NewTag
+	}
+	return ""
+}
+
 // Location is a geographic location attached to a memo.
 type Location struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -750,7 +815,7 @@ type Location struct {
 
 func (x *Location) Reset() {
 	*x = Location{}
-	mi := &file_api_memo_service_proto_msgTypes[7]
+	mi := &file_api_memo_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -762,7 +827,7 @@ func (x *Location) String() string {
 func (*Location) ProtoMessage() {}
 
 func (x *Location) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[7]
+	mi := &file_api_memo_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -775,7 +840,7 @@ func (x *Location) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Location.ProtoReflect.Descriptor instead.
 func (*Location) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{7}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Location) GetPlaceholder() string {
@@ -817,7 +882,7 @@ type ListMemoAttachmentsRequest struct {
 
 func (x *ListMemoAttachmentsRequest) Reset() {
 	*x = ListMemoAttachmentsRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[8]
+	mi := &file_api_memo_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -829,7 +894,7 @@ func (x *ListMemoAttachmentsRequest) String() string {
 func (*ListMemoAttachmentsRequest) ProtoMessage() {}
 
 func (x *ListMemoAttachmentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[8]
+	mi := &file_api_memo_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -842,7 +907,7 @@ func (x *ListMemoAttachmentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoAttachmentsRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoAttachmentsRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{8}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListMemoAttachmentsRequest) GetParent() string {
@@ -879,7 +944,7 @@ type ListMemoAttachmentsResponse struct {
 
 func (x *ListMemoAttachmentsResponse) Reset() {
 	*x = ListMemoAttachmentsResponse{}
-	mi := &file_api_memo_service_proto_msgTypes[9]
+	mi := &file_api_memo_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -891,7 +956,7 @@ func (x *ListMemoAttachmentsResponse) String() string {
 func (*ListMemoAttachmentsResponse) ProtoMessage() {}
 
 func (x *ListMemoAttachmentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[9]
+	mi := &file_api_memo_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -904,7 +969,7 @@ func (x *ListMemoAttachmentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoAttachmentsResponse.ProtoReflect.Descriptor instead.
 func (*ListMemoAttachmentsResponse) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{9}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListMemoAttachmentsResponse) GetAttachments() []*Attachment {
@@ -935,7 +1000,7 @@ type SetMemoAttachmentsRequest struct {
 
 func (x *SetMemoAttachmentsRequest) Reset() {
 	*x = SetMemoAttachmentsRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[10]
+	mi := &file_api_memo_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -947,7 +1012,7 @@ func (x *SetMemoAttachmentsRequest) String() string {
 func (*SetMemoAttachmentsRequest) ProtoMessage() {}
 
 func (x *SetMemoAttachmentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[10]
+	mi := &file_api_memo_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -960,7 +1025,7 @@ func (x *SetMemoAttachmentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetMemoAttachmentsRequest.ProtoReflect.Descriptor instead.
 func (*SetMemoAttachmentsRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{10}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SetMemoAttachmentsRequest) GetName() string {
@@ -993,7 +1058,7 @@ type MemoRelation struct {
 
 func (x *MemoRelation) Reset() {
 	*x = MemoRelation{}
-	mi := &file_api_memo_service_proto_msgTypes[11]
+	mi := &file_api_memo_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1005,7 +1070,7 @@ func (x *MemoRelation) String() string {
 func (*MemoRelation) ProtoMessage() {}
 
 func (x *MemoRelation) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[11]
+	mi := &file_api_memo_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1018,7 +1083,7 @@ func (x *MemoRelation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoRelation.ProtoReflect.Descriptor instead.
 func (*MemoRelation) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{11}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *MemoRelation) GetMemo() *MemoRelation_MemoRef {
@@ -1060,7 +1125,7 @@ type ListMemoRelationsRequest struct {
 
 func (x *ListMemoRelationsRequest) Reset() {
 	*x = ListMemoRelationsRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[12]
+	mi := &file_api_memo_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1072,7 +1137,7 @@ func (x *ListMemoRelationsRequest) String() string {
 func (*ListMemoRelationsRequest) ProtoMessage() {}
 
 func (x *ListMemoRelationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[12]
+	mi := &file_api_memo_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1085,7 +1150,7 @@ func (x *ListMemoRelationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoRelationsRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoRelationsRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{12}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListMemoRelationsRequest) GetParent() string {
@@ -1122,7 +1187,7 @@ type ListMemoRelationsResponse struct {
 
 func (x *ListMemoRelationsResponse) Reset() {
 	*x = ListMemoRelationsResponse{}
-	mi := &file_api_memo_service_proto_msgTypes[13]
+	mi := &file_api_memo_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1134,7 +1199,7 @@ func (x *ListMemoRelationsResponse) String() string {
 func (*ListMemoRelationsResponse) ProtoMessage() {}
 
 func (x *ListMemoRelationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[13]
+	mi := &file_api_memo_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1147,7 +1212,7 @@ func (x *ListMemoRelationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoRelationsResponse.ProtoReflect.Descriptor instead.
 func (*ListMemoRelationsResponse) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{13}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListMemoRelationsResponse) GetRelations() []*MemoRelation {
@@ -1179,7 +1244,7 @@ type SetMemoRelationsRequest struct {
 
 func (x *SetMemoRelationsRequest) Reset() {
 	*x = SetMemoRelationsRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[14]
+	mi := &file_api_memo_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1191,7 +1256,7 @@ func (x *SetMemoRelationsRequest) String() string {
 func (*SetMemoRelationsRequest) ProtoMessage() {}
 
 func (x *SetMemoRelationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[14]
+	mi := &file_api_memo_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1204,7 +1269,7 @@ func (x *SetMemoRelationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetMemoRelationsRequest.ProtoReflect.Descriptor instead.
 func (*SetMemoRelationsRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{14}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SetMemoRelationsRequest) GetName() string {
@@ -1241,7 +1306,7 @@ type ListMemoCommentsRequest struct {
 
 func (x *ListMemoCommentsRequest) Reset() {
 	*x = ListMemoCommentsRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[15]
+	mi := &file_api_memo_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1253,7 +1318,7 @@ func (x *ListMemoCommentsRequest) String() string {
 func (*ListMemoCommentsRequest) ProtoMessage() {}
 
 func (x *ListMemoCommentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[15]
+	mi := &file_api_memo_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1266,7 +1331,7 @@ func (x *ListMemoCommentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoCommentsRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoCommentsRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{15}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListMemoCommentsRequest) GetParent() string {
@@ -1310,7 +1375,7 @@ type ListMemoCommentsResponse struct {
 
 func (x *ListMemoCommentsResponse) Reset() {
 	*x = ListMemoCommentsResponse{}
-	mi := &file_api_memo_service_proto_msgTypes[16]
+	mi := &file_api_memo_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1322,7 +1387,7 @@ func (x *ListMemoCommentsResponse) String() string {
 func (*ListMemoCommentsResponse) ProtoMessage() {}
 
 func (x *ListMemoCommentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[16]
+	mi := &file_api_memo_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1335,7 +1400,7 @@ func (x *ListMemoCommentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoCommentsResponse.ProtoReflect.Descriptor instead.
 func (*ListMemoCommentsResponse) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{16}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListMemoCommentsResponse) GetComments() []*Memo {
@@ -1369,7 +1434,7 @@ type CreateMemoCommentRequest struct {
 
 func (x *CreateMemoCommentRequest) Reset() {
 	*x = CreateMemoCommentRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[17]
+	mi := &file_api_memo_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1381,7 +1446,7 @@ func (x *CreateMemoCommentRequest) String() string {
 func (*CreateMemoCommentRequest) ProtoMessage() {}
 
 func (x *CreateMemoCommentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[17]
+	mi := &file_api_memo_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1394,7 +1459,7 @@ func (x *CreateMemoCommentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMemoCommentRequest.ProtoReflect.Descriptor instead.
 func (*CreateMemoCommentRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{17}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateMemoCommentRequest) GetParent() string {
@@ -1437,7 +1502,7 @@ type Reaction struct {
 
 func (x *Reaction) Reset() {
 	*x = Reaction{}
-	mi := &file_api_memo_service_proto_msgTypes[18]
+	mi := &file_api_memo_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1449,7 +1514,7 @@ func (x *Reaction) String() string {
 func (*Reaction) ProtoMessage() {}
 
 func (x *Reaction) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[18]
+	mi := &file_api_memo_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1462,7 +1527,7 @@ func (x *Reaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Reaction.ProtoReflect.Descriptor instead.
 func (*Reaction) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{18}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *Reaction) GetName() string {
@@ -1511,7 +1576,7 @@ type ListMemoReactionsRequest struct {
 
 func (x *ListMemoReactionsRequest) Reset() {
 	*x = ListMemoReactionsRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[19]
+	mi := &file_api_memo_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1523,7 +1588,7 @@ func (x *ListMemoReactionsRequest) String() string {
 func (*ListMemoReactionsRequest) ProtoMessage() {}
 
 func (x *ListMemoReactionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[19]
+	mi := &file_api_memo_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1536,7 +1601,7 @@ func (x *ListMemoReactionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoReactionsRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoReactionsRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{19}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListMemoReactionsRequest) GetParent() string {
@@ -1573,7 +1638,7 @@ type ListMemoReactionsResponse struct {
 
 func (x *ListMemoReactionsResponse) Reset() {
 	*x = ListMemoReactionsResponse{}
-	mi := &file_api_memo_service_proto_msgTypes[20]
+	mi := &file_api_memo_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1585,7 +1650,7 @@ func (x *ListMemoReactionsResponse) String() string {
 func (*ListMemoReactionsResponse) ProtoMessage() {}
 
 func (x *ListMemoReactionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[20]
+	mi := &file_api_memo_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1598,7 +1663,7 @@ func (x *ListMemoReactionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoReactionsResponse.ProtoReflect.Descriptor instead.
 func (*ListMemoReactionsResponse) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{20}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListMemoReactionsResponse) GetReactions() []*Reaction {
@@ -1627,7 +1692,7 @@ type DeleteMemoReactionRequest struct {
 
 func (x *DeleteMemoReactionRequest) Reset() {
 	*x = DeleteMemoReactionRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[21]
+	mi := &file_api_memo_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1704,7 @@ func (x *DeleteMemoReactionRequest) String() string {
 func (*DeleteMemoReactionRequest) ProtoMessage() {}
 
 func (x *DeleteMemoReactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[21]
+	mi := &file_api_memo_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +1717,7 @@ func (x *DeleteMemoReactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMemoReactionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMemoReactionRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{21}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DeleteMemoReactionRequest) GetName() string {
@@ -1676,7 +1741,7 @@ type UpsertMemoReactionRequest struct {
 
 func (x *UpsertMemoReactionRequest) Reset() {
 	*x = UpsertMemoReactionRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[22]
+	mi := &file_api_memo_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1688,7 +1753,7 @@ func (x *UpsertMemoReactionRequest) String() string {
 func (*UpsertMemoReactionRequest) ProtoMessage() {}
 
 func (x *UpsertMemoReactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[22]
+	mi := &file_api_memo_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1701,7 +1766,7 @@ func (x *UpsertMemoReactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpsertMemoReactionRequest.ProtoReflect.Descriptor instead.
 func (*UpsertMemoReactionRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{22}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UpsertMemoReactionRequest) GetParent() string {
@@ -1737,7 +1802,7 @@ type MemoShare struct {
 
 func (x *MemoShare) Reset() {
 	*x = MemoShare{}
-	mi := &file_api_memo_service_proto_msgTypes[23]
+	mi := &file_api_memo_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1749,7 +1814,7 @@ func (x *MemoShare) String() string {
 func (*MemoShare) ProtoMessage() {}
 
 func (x *MemoShare) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[23]
+	mi := &file_api_memo_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1762,7 +1827,7 @@ func (x *MemoShare) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoShare.ProtoReflect.Descriptor instead.
 func (*MemoShare) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{23}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *MemoShare) GetName() string {
@@ -1798,7 +1863,7 @@ type ListMemoSharesRequest struct {
 
 func (x *ListMemoSharesRequest) Reset() {
 	*x = ListMemoSharesRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[24]
+	mi := &file_api_memo_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1810,7 +1875,7 @@ func (x *ListMemoSharesRequest) String() string {
 func (*ListMemoSharesRequest) ProtoMessage() {}
 
 func (x *ListMemoSharesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[24]
+	mi := &file_api_memo_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1823,7 +1888,7 @@ func (x *ListMemoSharesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoSharesRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoSharesRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{24}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListMemoSharesRequest) GetParent() string {
@@ -1844,7 +1909,7 @@ type ListMemoSharesResponse struct {
 
 func (x *ListMemoSharesResponse) Reset() {
 	*x = ListMemoSharesResponse{}
-	mi := &file_api_memo_service_proto_msgTypes[25]
+	mi := &file_api_memo_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1856,7 +1921,7 @@ func (x *ListMemoSharesResponse) String() string {
 func (*ListMemoSharesResponse) ProtoMessage() {}
 
 func (x *ListMemoSharesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[25]
+	mi := &file_api_memo_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1869,7 +1934,7 @@ func (x *ListMemoSharesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoSharesResponse.ProtoReflect.Descriptor instead.
 func (*ListMemoSharesResponse) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{25}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListMemoSharesResponse) GetMemoShares() []*MemoShare {
@@ -1893,7 +1958,7 @@ type CreateMemoShareRequest struct {
 
 func (x *CreateMemoShareRequest) Reset() {
 	*x = CreateMemoShareRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[26]
+	mi := &file_api_memo_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1905,7 +1970,7 @@ func (x *CreateMemoShareRequest) String() string {
 func (*CreateMemoShareRequest) ProtoMessage() {}
 
 func (x *CreateMemoShareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[26]
+	mi := &file_api_memo_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1918,7 +1983,7 @@ func (x *CreateMemoShareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMemoShareRequest.ProtoReflect.Descriptor instead.
 func (*CreateMemoShareRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{26}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreateMemoShareRequest) GetParent() string {
@@ -1947,7 +2012,7 @@ type DeleteMemoShareRequest struct {
 
 func (x *DeleteMemoShareRequest) Reset() {
 	*x = DeleteMemoShareRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[27]
+	mi := &file_api_memo_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1959,7 +2024,7 @@ func (x *DeleteMemoShareRequest) String() string {
 func (*DeleteMemoShareRequest) ProtoMessage() {}
 
 func (x *DeleteMemoShareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[27]
+	mi := &file_api_memo_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1972,7 +2037,7 @@ func (x *DeleteMemoShareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMemoShareRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMemoShareRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{27}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteMemoShareRequest) GetName() string {
@@ -1993,7 +2058,7 @@ type GetSharedMemoRequest struct {
 
 func (x *GetSharedMemoRequest) Reset() {
 	*x = GetSharedMemoRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[28]
+	mi := &file_api_memo_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2005,7 +2070,7 @@ func (x *GetSharedMemoRequest) String() string {
 func (*GetSharedMemoRequest) ProtoMessage() {}
 
 func (x *GetSharedMemoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[28]
+	mi := &file_api_memo_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2018,7 +2083,7 @@ func (x *GetSharedMemoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSharedMemoRequest.ProtoReflect.Descriptor instead.
 func (*GetSharedMemoRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{28}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetSharedMemoRequest) GetShareToken() string {
@@ -2045,7 +2110,7 @@ type LinkMetadata struct {
 
 func (x *LinkMetadata) Reset() {
 	*x = LinkMetadata{}
-	mi := &file_api_memo_service_proto_msgTypes[29]
+	mi := &file_api_memo_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2057,7 +2122,7 @@ func (x *LinkMetadata) String() string {
 func (*LinkMetadata) ProtoMessage() {}
 
 func (x *LinkMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[29]
+	mi := &file_api_memo_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2070,7 +2135,7 @@ func (x *LinkMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LinkMetadata.ProtoReflect.Descriptor instead.
 func (*LinkMetadata) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{29}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *LinkMetadata) GetUrl() string {
@@ -2112,7 +2177,7 @@ type GetLinkMetadataRequest struct {
 
 func (x *GetLinkMetadataRequest) Reset() {
 	*x = GetLinkMetadataRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[30]
+	mi := &file_api_memo_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2124,7 +2189,7 @@ func (x *GetLinkMetadataRequest) String() string {
 func (*GetLinkMetadataRequest) ProtoMessage() {}
 
 func (x *GetLinkMetadataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[30]
+	mi := &file_api_memo_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2137,7 +2202,7 @@ func (x *GetLinkMetadataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLinkMetadataRequest.ProtoReflect.Descriptor instead.
 func (*GetLinkMetadataRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{30}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetLinkMetadataRequest) GetUrl() string {
@@ -2158,7 +2223,7 @@ type BatchGetLinkMetadataRequest struct {
 
 func (x *BatchGetLinkMetadataRequest) Reset() {
 	*x = BatchGetLinkMetadataRequest{}
-	mi := &file_api_memo_service_proto_msgTypes[31]
+	mi := &file_api_memo_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2170,7 +2235,7 @@ func (x *BatchGetLinkMetadataRequest) String() string {
 func (*BatchGetLinkMetadataRequest) ProtoMessage() {}
 
 func (x *BatchGetLinkMetadataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[31]
+	mi := &file_api_memo_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2183,7 +2248,7 @@ func (x *BatchGetLinkMetadataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetLinkMetadataRequest.ProtoReflect.Descriptor instead.
 func (*BatchGetLinkMetadataRequest) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{31}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *BatchGetLinkMetadataRequest) GetUrls() []string {
@@ -2204,7 +2269,7 @@ type BatchGetLinkMetadataResponse struct {
 
 func (x *BatchGetLinkMetadataResponse) Reset() {
 	*x = BatchGetLinkMetadataResponse{}
-	mi := &file_api_memo_service_proto_msgTypes[32]
+	mi := &file_api_memo_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2216,7 +2281,7 @@ func (x *BatchGetLinkMetadataResponse) String() string {
 func (*BatchGetLinkMetadataResponse) ProtoMessage() {}
 
 func (x *BatchGetLinkMetadataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[32]
+	mi := &file_api_memo_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2229,7 +2294,7 @@ func (x *BatchGetLinkMetadataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetLinkMetadataResponse.ProtoReflect.Descriptor instead.
 func (*BatchGetLinkMetadataResponse) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{32}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *BatchGetLinkMetadataResponse) GetLinkMetadata() []*LinkMetadata {
@@ -2258,7 +2323,7 @@ type Memo_Property struct {
 
 func (x *Memo_Property) Reset() {
 	*x = Memo_Property{}
-	mi := &file_api_memo_service_proto_msgTypes[33]
+	mi := &file_api_memo_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2270,7 +2335,7 @@ func (x *Memo_Property) String() string {
 func (*Memo_Property) ProtoMessage() {}
 
 func (x *Memo_Property) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[33]
+	mi := &file_api_memo_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2336,7 +2401,7 @@ type MemoRelation_MemoRef struct {
 
 func (x *MemoRelation_MemoRef) Reset() {
 	*x = MemoRelation_MemoRef{}
-	mi := &file_api_memo_service_proto_msgTypes[34]
+	mi := &file_api_memo_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2348,7 +2413,7 @@ func (x *MemoRelation_MemoRef) String() string {
 func (*MemoRelation_MemoRef) ProtoMessage() {}
 
 func (x *MemoRelation_MemoRef) ProtoReflect() protoreflect.Message {
-	mi := &file_api_memo_service_proto_msgTypes[34]
+	mi := &file_api_memo_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2361,7 +2426,7 @@ func (x *MemoRelation_MemoRef) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoRelation_MemoRef.ProtoReflect.Descriptor instead.
 func (*MemoRelation_MemoRef) Descriptor() ([]byte, []int) {
-	return file_api_memo_service_proto_rawDescGZIP(), []int{11, 0}
+	return file_api_memo_service_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *MemoRelation_MemoRef) GetName() string {
@@ -2443,7 +2508,12 @@ const file_api_memo_service_proto_rawDesc = "" +
 	"\x11DeleteMemoRequest\x12*\n" +
 	"\x04name\x18\x01 \x01(\tB\x16\xe0A\x02\xfaA\x10\n" +
 	"\x0ememos.api/MemoR\x04name\x12\x19\n" +
-	"\x05force\x18\x02 \x01(\bB\x03\xe0A\x01R\x05force\"u\n" +
+	"\x05force\x18\x02 \x01(\bB\x03\xe0A\x01R\x05force\"\x82\x01\n" +
+	"\x14RenameMemoTagRequest\x12.\n" +
+	"\x06parent\x18\x01 \x01(\tB\x16\xe0A\x02\xfaA\x10\n" +
+	"\x0ememos.api/MemoR\x06parent\x12\x1c\n" +
+	"\aold_tag\x18\x02 \x01(\tB\x03\xe0A\x02R\x06oldTag\x12\x1c\n" +
+	"\anew_tag\x18\x03 \x01(\tB\x03\xe0A\x02R\x06newTag\"u\n" +
 	"\bLocation\x12%\n" +
 	"\vplaceholder\x18\x01 \x01(\tB\x03\xe0A\x01R\vplaceholder\x12\x1f\n" +
 	"\blatitude\x18\x02 \x01(\x01B\x03\xe0A\x01R\blatitude\x12!\n" +
@@ -2570,7 +2640,7 @@ const file_api_memo_service_proto_rawDesc = "" +
 	"\tPROTECTED\x10\x02\x12\n" +
 	"\n" +
 	"\x06PUBLIC\x10\x03\x12\t\n" +
-	"\x05SPACE\x10\x042\x83\x14\n" +
+	"\x05SPACE\x10\x042\x95\x15\n" +
 	"\vMemoService\x12]\n" +
 	"\tListMemos\x12\x1b.memos.api.ListMemosRequest\x1a\x1c.memos.api.ListMemosResponse\"\x15\xdaA\x00\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/api/memos\x12Y\n" +
@@ -2581,7 +2651,8 @@ const file_api_memo_service_proto_rawDesc = "" +
 	"\n" +
 	"UpdateMemo\x12\x1c.memos.api.UpdateMemoRequest\x1a\x0f.memos.api.Memo\"9\xdaA\x10memo,update_mask\x82\xd3\xe4\x93\x02 :\x04memo2\x18/api/{memo.name=memos/*}\x12f\n" +
 	"\n" +
-	"DeleteMemo\x12\x1c.memos.api.DeleteMemoRequest\x1a\x16.google.protobuf.Empty\"\"\xdaA\x04name\x82\xd3\xe4\x93\x02\x15*\x13/api/{name=memos/*}\x12\x98\x01\n" +
+	"DeleteMemo\x12\x1c.memos.api.DeleteMemoRequest\x1a\x16.google.protobuf.Empty\"\"\xdaA\x04name\x82\xd3\xe4\x93\x02\x15*\x13/api/{name=memos/*}\x12\x8f\x01\n" +
+	"\rRenameMemoTag\x12\x1f.memos.api.RenameMemoTagRequest\x1a\x16.google.protobuf.Empty\"E\xdaA\x16parent,old_tag,new_tag\x82\xd3\xe4\x93\x02&:\x01*2!/api/{parent=memos/*}/tags:rename\x12\x98\x01\n" +
 	"\x13ListMemoAttachments\x12%.memos.api.ListMemoAttachmentsRequest\x1a&.memos.api.ListMemoAttachmentsResponse\"2\xdaA\x06parent\x82\xd3\xe4\x93\x02#\x12!/api/{parent=memos/*}/attachments\x12\x85\x01\n" +
 	"\x12SetMemoAttachments\x12$.memos.api.SetMemoAttachmentsRequest\x1a\x16.google.protobuf.Empty\"1\xdaA\x04name\x82\xd3\xe4\x93\x02$:\x01*2\x1f/api/{name=memos/*}/attachments\x12\x90\x01\n" +
 	"\x11ListMemoRelations\x12#.memos.api.ListMemoRelationsRequest\x1a$.memos.api.ListMemoRelationsResponse\"0\xdaA\x06parent\x82\xd3\xe4\x93\x02!\x12\x1f/api/{parent=memos/*}/relations\x12\x7f\n" +
@@ -2614,7 +2685,7 @@ func file_api_memo_service_proto_rawDescGZIP() []byte {
 }
 
 var file_api_memo_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_api_memo_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_api_memo_service_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_api_memo_service_proto_goTypes = []any{
 	(Visibility)(0),                      // 0: memos.api.Visibility
 	(MemoRelation_Type)(0),               // 1: memos.api.MemoRelation.Type
@@ -2625,114 +2696,117 @@ var file_api_memo_service_proto_goTypes = []any{
 	(*CreateMemoRequest)(nil),            // 6: memos.api.CreateMemoRequest
 	(*UpdateMemoRequest)(nil),            // 7: memos.api.UpdateMemoRequest
 	(*DeleteMemoRequest)(nil),            // 8: memos.api.DeleteMemoRequest
-	(*Location)(nil),                     // 9: memos.api.Location
-	(*ListMemoAttachmentsRequest)(nil),   // 10: memos.api.ListMemoAttachmentsRequest
-	(*ListMemoAttachmentsResponse)(nil),  // 11: memos.api.ListMemoAttachmentsResponse
-	(*SetMemoAttachmentsRequest)(nil),    // 12: memos.api.SetMemoAttachmentsRequest
-	(*MemoRelation)(nil),                 // 13: memos.api.MemoRelation
-	(*ListMemoRelationsRequest)(nil),     // 14: memos.api.ListMemoRelationsRequest
-	(*ListMemoRelationsResponse)(nil),    // 15: memos.api.ListMemoRelationsResponse
-	(*SetMemoRelationsRequest)(nil),      // 16: memos.api.SetMemoRelationsRequest
-	(*ListMemoCommentsRequest)(nil),      // 17: memos.api.ListMemoCommentsRequest
-	(*ListMemoCommentsResponse)(nil),     // 18: memos.api.ListMemoCommentsResponse
-	(*CreateMemoCommentRequest)(nil),     // 19: memos.api.CreateMemoCommentRequest
-	(*Reaction)(nil),                     // 20: memos.api.Reaction
-	(*ListMemoReactionsRequest)(nil),     // 21: memos.api.ListMemoReactionsRequest
-	(*ListMemoReactionsResponse)(nil),    // 22: memos.api.ListMemoReactionsResponse
-	(*DeleteMemoReactionRequest)(nil),    // 23: memos.api.DeleteMemoReactionRequest
-	(*UpsertMemoReactionRequest)(nil),    // 24: memos.api.UpsertMemoReactionRequest
-	(*MemoShare)(nil),                    // 25: memos.api.MemoShare
-	(*ListMemoSharesRequest)(nil),        // 26: memos.api.ListMemoSharesRequest
-	(*ListMemoSharesResponse)(nil),       // 27: memos.api.ListMemoSharesResponse
-	(*CreateMemoShareRequest)(nil),       // 28: memos.api.CreateMemoShareRequest
-	(*DeleteMemoShareRequest)(nil),       // 29: memos.api.DeleteMemoShareRequest
-	(*GetSharedMemoRequest)(nil),         // 30: memos.api.GetSharedMemoRequest
-	(*LinkMetadata)(nil),                 // 31: memos.api.LinkMetadata
-	(*GetLinkMetadataRequest)(nil),       // 32: memos.api.GetLinkMetadataRequest
-	(*BatchGetLinkMetadataRequest)(nil),  // 33: memos.api.BatchGetLinkMetadataRequest
-	(*BatchGetLinkMetadataResponse)(nil), // 34: memos.api.BatchGetLinkMetadataResponse
-	(*Memo_Property)(nil),                // 35: memos.api.Memo.Property
-	(*MemoRelation_MemoRef)(nil),         // 36: memos.api.MemoRelation.MemoRef
-	(State)(0),                           // 37: memos.api.State
-	(*Attachment)(nil),                   // 38: memos.api.Attachment
-	(*timestamppb.Timestamp)(nil),        // 39: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),        // 40: google.protobuf.FieldMask
-	(*emptypb.Empty)(nil),                // 41: google.protobuf.Empty
+	(*RenameMemoTagRequest)(nil),         // 9: memos.api.RenameMemoTagRequest
+	(*Location)(nil),                     // 10: memos.api.Location
+	(*ListMemoAttachmentsRequest)(nil),   // 11: memos.api.ListMemoAttachmentsRequest
+	(*ListMemoAttachmentsResponse)(nil),  // 12: memos.api.ListMemoAttachmentsResponse
+	(*SetMemoAttachmentsRequest)(nil),    // 13: memos.api.SetMemoAttachmentsRequest
+	(*MemoRelation)(nil),                 // 14: memos.api.MemoRelation
+	(*ListMemoRelationsRequest)(nil),     // 15: memos.api.ListMemoRelationsRequest
+	(*ListMemoRelationsResponse)(nil),    // 16: memos.api.ListMemoRelationsResponse
+	(*SetMemoRelationsRequest)(nil),      // 17: memos.api.SetMemoRelationsRequest
+	(*ListMemoCommentsRequest)(nil),      // 18: memos.api.ListMemoCommentsRequest
+	(*ListMemoCommentsResponse)(nil),     // 19: memos.api.ListMemoCommentsResponse
+	(*CreateMemoCommentRequest)(nil),     // 20: memos.api.CreateMemoCommentRequest
+	(*Reaction)(nil),                     // 21: memos.api.Reaction
+	(*ListMemoReactionsRequest)(nil),     // 22: memos.api.ListMemoReactionsRequest
+	(*ListMemoReactionsResponse)(nil),    // 23: memos.api.ListMemoReactionsResponse
+	(*DeleteMemoReactionRequest)(nil),    // 24: memos.api.DeleteMemoReactionRequest
+	(*UpsertMemoReactionRequest)(nil),    // 25: memos.api.UpsertMemoReactionRequest
+	(*MemoShare)(nil),                    // 26: memos.api.MemoShare
+	(*ListMemoSharesRequest)(nil),        // 27: memos.api.ListMemoSharesRequest
+	(*ListMemoSharesResponse)(nil),       // 28: memos.api.ListMemoSharesResponse
+	(*CreateMemoShareRequest)(nil),       // 29: memos.api.CreateMemoShareRequest
+	(*DeleteMemoShareRequest)(nil),       // 30: memos.api.DeleteMemoShareRequest
+	(*GetSharedMemoRequest)(nil),         // 31: memos.api.GetSharedMemoRequest
+	(*LinkMetadata)(nil),                 // 32: memos.api.LinkMetadata
+	(*GetLinkMetadataRequest)(nil),       // 33: memos.api.GetLinkMetadataRequest
+	(*BatchGetLinkMetadataRequest)(nil),  // 34: memos.api.BatchGetLinkMetadataRequest
+	(*BatchGetLinkMetadataResponse)(nil), // 35: memos.api.BatchGetLinkMetadataResponse
+	(*Memo_Property)(nil),                // 36: memos.api.Memo.Property
+	(*MemoRelation_MemoRef)(nil),         // 37: memos.api.MemoRelation.MemoRef
+	(State)(0),                           // 38: memos.api.State
+	(*Attachment)(nil),                   // 39: memos.api.Attachment
+	(*timestamppb.Timestamp)(nil),        // 40: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),        // 41: google.protobuf.FieldMask
+	(*emptypb.Empty)(nil),                // 42: google.protobuf.Empty
 }
 var file_api_memo_service_proto_depIdxs = []int32{
-	9,  // 0: memos.api.Memo.location:type_name -> memos.api.Location
+	10, // 0: memos.api.Memo.location:type_name -> memos.api.Location
 	0,  // 1: memos.api.Memo.visibility:type_name -> memos.api.Visibility
-	37, // 2: memos.api.Memo.state:type_name -> memos.api.State
-	38, // 3: memos.api.Memo.attachments:type_name -> memos.api.Attachment
-	13, // 4: memos.api.Memo.relations:type_name -> memos.api.MemoRelation
-	20, // 5: memos.api.Memo.reactions:type_name -> memos.api.Reaction
-	35, // 6: memos.api.Memo.property:type_name -> memos.api.Memo.Property
-	39, // 7: memos.api.Memo.create_time:type_name -> google.protobuf.Timestamp
-	39, // 8: memos.api.Memo.update_time:type_name -> google.protobuf.Timestamp
-	37, // 9: memos.api.ListMemosRequest.state:type_name -> memos.api.State
+	38, // 2: memos.api.Memo.state:type_name -> memos.api.State
+	39, // 3: memos.api.Memo.attachments:type_name -> memos.api.Attachment
+	14, // 4: memos.api.Memo.relations:type_name -> memos.api.MemoRelation
+	21, // 5: memos.api.Memo.reactions:type_name -> memos.api.Reaction
+	36, // 6: memos.api.Memo.property:type_name -> memos.api.Memo.Property
+	40, // 7: memos.api.Memo.create_time:type_name -> google.protobuf.Timestamp
+	40, // 8: memos.api.Memo.update_time:type_name -> google.protobuf.Timestamp
+	38, // 9: memos.api.ListMemosRequest.state:type_name -> memos.api.State
 	2,  // 10: memos.api.ListMemosResponse.memos:type_name -> memos.api.Memo
 	2,  // 11: memos.api.CreateMemoRequest.memo:type_name -> memos.api.Memo
 	2,  // 12: memos.api.UpdateMemoRequest.memo:type_name -> memos.api.Memo
-	40, // 13: memos.api.UpdateMemoRequest.update_mask:type_name -> google.protobuf.FieldMask
-	38, // 14: memos.api.ListMemoAttachmentsResponse.attachments:type_name -> memos.api.Attachment
-	38, // 15: memos.api.SetMemoAttachmentsRequest.attachments:type_name -> memos.api.Attachment
-	36, // 16: memos.api.MemoRelation.memo:type_name -> memos.api.MemoRelation.MemoRef
-	36, // 17: memos.api.MemoRelation.related_memo:type_name -> memos.api.MemoRelation.MemoRef
+	41, // 13: memos.api.UpdateMemoRequest.update_mask:type_name -> google.protobuf.FieldMask
+	39, // 14: memos.api.ListMemoAttachmentsResponse.attachments:type_name -> memos.api.Attachment
+	39, // 15: memos.api.SetMemoAttachmentsRequest.attachments:type_name -> memos.api.Attachment
+	37, // 16: memos.api.MemoRelation.memo:type_name -> memos.api.MemoRelation.MemoRef
+	37, // 17: memos.api.MemoRelation.related_memo:type_name -> memos.api.MemoRelation.MemoRef
 	1,  // 18: memos.api.MemoRelation.type:type_name -> memos.api.MemoRelation.Type
-	13, // 19: memos.api.ListMemoRelationsResponse.relations:type_name -> memos.api.MemoRelation
-	13, // 20: memos.api.SetMemoRelationsRequest.relations:type_name -> memos.api.MemoRelation
+	14, // 19: memos.api.ListMemoRelationsResponse.relations:type_name -> memos.api.MemoRelation
+	14, // 20: memos.api.SetMemoRelationsRequest.relations:type_name -> memos.api.MemoRelation
 	2,  // 21: memos.api.ListMemoCommentsResponse.comments:type_name -> memos.api.Memo
 	2,  // 22: memos.api.CreateMemoCommentRequest.comment:type_name -> memos.api.Memo
-	39, // 23: memos.api.Reaction.create_time:type_name -> google.protobuf.Timestamp
-	20, // 24: memos.api.ListMemoReactionsResponse.reactions:type_name -> memos.api.Reaction
-	20, // 25: memos.api.UpsertMemoReactionRequest.reaction:type_name -> memos.api.Reaction
-	39, // 26: memos.api.MemoShare.create_time:type_name -> google.protobuf.Timestamp
-	39, // 27: memos.api.MemoShare.expire_time:type_name -> google.protobuf.Timestamp
-	25, // 28: memos.api.ListMemoSharesResponse.memo_shares:type_name -> memos.api.MemoShare
-	25, // 29: memos.api.CreateMemoShareRequest.memo_share:type_name -> memos.api.MemoShare
-	31, // 30: memos.api.BatchGetLinkMetadataResponse.link_metadata:type_name -> memos.api.LinkMetadata
+	40, // 23: memos.api.Reaction.create_time:type_name -> google.protobuf.Timestamp
+	21, // 24: memos.api.ListMemoReactionsResponse.reactions:type_name -> memos.api.Reaction
+	21, // 25: memos.api.UpsertMemoReactionRequest.reaction:type_name -> memos.api.Reaction
+	40, // 26: memos.api.MemoShare.create_time:type_name -> google.protobuf.Timestamp
+	40, // 27: memos.api.MemoShare.expire_time:type_name -> google.protobuf.Timestamp
+	26, // 28: memos.api.ListMemoSharesResponse.memo_shares:type_name -> memos.api.MemoShare
+	26, // 29: memos.api.CreateMemoShareRequest.memo_share:type_name -> memos.api.MemoShare
+	32, // 30: memos.api.BatchGetLinkMetadataResponse.link_metadata:type_name -> memos.api.LinkMetadata
 	3,  // 31: memos.api.MemoService.ListMemos:input_type -> memos.api.ListMemosRequest
 	5,  // 32: memos.api.MemoService.GetMemo:input_type -> memos.api.GetMemoRequest
 	6,  // 33: memos.api.MemoService.CreateMemo:input_type -> memos.api.CreateMemoRequest
 	7,  // 34: memos.api.MemoService.UpdateMemo:input_type -> memos.api.UpdateMemoRequest
 	8,  // 35: memos.api.MemoService.DeleteMemo:input_type -> memos.api.DeleteMemoRequest
-	10, // 36: memos.api.MemoService.ListMemoAttachments:input_type -> memos.api.ListMemoAttachmentsRequest
-	12, // 37: memos.api.MemoService.SetMemoAttachments:input_type -> memos.api.SetMemoAttachmentsRequest
-	14, // 38: memos.api.MemoService.ListMemoRelations:input_type -> memos.api.ListMemoRelationsRequest
-	16, // 39: memos.api.MemoService.SetMemoRelations:input_type -> memos.api.SetMemoRelationsRequest
-	17, // 40: memos.api.MemoService.ListMemoComments:input_type -> memos.api.ListMemoCommentsRequest
-	19, // 41: memos.api.MemoService.CreateMemoComment:input_type -> memos.api.CreateMemoCommentRequest
-	21, // 42: memos.api.MemoService.ListMemoReactions:input_type -> memos.api.ListMemoReactionsRequest
-	23, // 43: memos.api.MemoService.DeleteMemoReaction:input_type -> memos.api.DeleteMemoReactionRequest
-	24, // 44: memos.api.MemoService.UpsertMemoReaction:input_type -> memos.api.UpsertMemoReactionRequest
-	26, // 45: memos.api.MemoService.ListMemoShares:input_type -> memos.api.ListMemoSharesRequest
-	28, // 46: memos.api.MemoService.CreateMemoShare:input_type -> memos.api.CreateMemoShareRequest
-	29, // 47: memos.api.MemoService.DeleteMemoShare:input_type -> memos.api.DeleteMemoShareRequest
-	30, // 48: memos.api.MemoService.GetSharedMemo:input_type -> memos.api.GetSharedMemoRequest
-	32, // 49: memos.api.MemoService.GetLinkMetadata:input_type -> memos.api.GetLinkMetadataRequest
-	33, // 50: memos.api.MemoService.BatchGetLinkMetadata:input_type -> memos.api.BatchGetLinkMetadataRequest
-	4,  // 51: memos.api.MemoService.ListMemos:output_type -> memos.api.ListMemosResponse
-	2,  // 52: memos.api.MemoService.GetMemo:output_type -> memos.api.Memo
-	2,  // 53: memos.api.MemoService.CreateMemo:output_type -> memos.api.Memo
-	2,  // 54: memos.api.MemoService.UpdateMemo:output_type -> memos.api.Memo
-	41, // 55: memos.api.MemoService.DeleteMemo:output_type -> google.protobuf.Empty
-	11, // 56: memos.api.MemoService.ListMemoAttachments:output_type -> memos.api.ListMemoAttachmentsResponse
-	41, // 57: memos.api.MemoService.SetMemoAttachments:output_type -> google.protobuf.Empty
-	15, // 58: memos.api.MemoService.ListMemoRelations:output_type -> memos.api.ListMemoRelationsResponse
-	41, // 59: memos.api.MemoService.SetMemoRelations:output_type -> google.protobuf.Empty
-	18, // 60: memos.api.MemoService.ListMemoComments:output_type -> memos.api.ListMemoCommentsResponse
-	2,  // 61: memos.api.MemoService.CreateMemoComment:output_type -> memos.api.Memo
-	22, // 62: memos.api.MemoService.ListMemoReactions:output_type -> memos.api.ListMemoReactionsResponse
-	41, // 63: memos.api.MemoService.DeleteMemoReaction:output_type -> google.protobuf.Empty
-	20, // 64: memos.api.MemoService.UpsertMemoReaction:output_type -> memos.api.Reaction
-	27, // 65: memos.api.MemoService.ListMemoShares:output_type -> memos.api.ListMemoSharesResponse
-	25, // 66: memos.api.MemoService.CreateMemoShare:output_type -> memos.api.MemoShare
-	41, // 67: memos.api.MemoService.DeleteMemoShare:output_type -> google.protobuf.Empty
-	2,  // 68: memos.api.MemoService.GetSharedMemo:output_type -> memos.api.Memo
-	31, // 69: memos.api.MemoService.GetLinkMetadata:output_type -> memos.api.LinkMetadata
-	34, // 70: memos.api.MemoService.BatchGetLinkMetadata:output_type -> memos.api.BatchGetLinkMetadataResponse
-	51, // [51:71] is the sub-list for method output_type
-	31, // [31:51] is the sub-list for method input_type
+	9,  // 36: memos.api.MemoService.RenameMemoTag:input_type -> memos.api.RenameMemoTagRequest
+	11, // 37: memos.api.MemoService.ListMemoAttachments:input_type -> memos.api.ListMemoAttachmentsRequest
+	13, // 38: memos.api.MemoService.SetMemoAttachments:input_type -> memos.api.SetMemoAttachmentsRequest
+	15, // 39: memos.api.MemoService.ListMemoRelations:input_type -> memos.api.ListMemoRelationsRequest
+	17, // 40: memos.api.MemoService.SetMemoRelations:input_type -> memos.api.SetMemoRelationsRequest
+	18, // 41: memos.api.MemoService.ListMemoComments:input_type -> memos.api.ListMemoCommentsRequest
+	20, // 42: memos.api.MemoService.CreateMemoComment:input_type -> memos.api.CreateMemoCommentRequest
+	22, // 43: memos.api.MemoService.ListMemoReactions:input_type -> memos.api.ListMemoReactionsRequest
+	24, // 44: memos.api.MemoService.DeleteMemoReaction:input_type -> memos.api.DeleteMemoReactionRequest
+	25, // 45: memos.api.MemoService.UpsertMemoReaction:input_type -> memos.api.UpsertMemoReactionRequest
+	27, // 46: memos.api.MemoService.ListMemoShares:input_type -> memos.api.ListMemoSharesRequest
+	29, // 47: memos.api.MemoService.CreateMemoShare:input_type -> memos.api.CreateMemoShareRequest
+	30, // 48: memos.api.MemoService.DeleteMemoShare:input_type -> memos.api.DeleteMemoShareRequest
+	31, // 49: memos.api.MemoService.GetSharedMemo:input_type -> memos.api.GetSharedMemoRequest
+	33, // 50: memos.api.MemoService.GetLinkMetadata:input_type -> memos.api.GetLinkMetadataRequest
+	34, // 51: memos.api.MemoService.BatchGetLinkMetadata:input_type -> memos.api.BatchGetLinkMetadataRequest
+	4,  // 52: memos.api.MemoService.ListMemos:output_type -> memos.api.ListMemosResponse
+	2,  // 53: memos.api.MemoService.GetMemo:output_type -> memos.api.Memo
+	2,  // 54: memos.api.MemoService.CreateMemo:output_type -> memos.api.Memo
+	2,  // 55: memos.api.MemoService.UpdateMemo:output_type -> memos.api.Memo
+	42, // 56: memos.api.MemoService.DeleteMemo:output_type -> google.protobuf.Empty
+	42, // 57: memos.api.MemoService.RenameMemoTag:output_type -> google.protobuf.Empty
+	12, // 58: memos.api.MemoService.ListMemoAttachments:output_type -> memos.api.ListMemoAttachmentsResponse
+	42, // 59: memos.api.MemoService.SetMemoAttachments:output_type -> google.protobuf.Empty
+	16, // 60: memos.api.MemoService.ListMemoRelations:output_type -> memos.api.ListMemoRelationsResponse
+	42, // 61: memos.api.MemoService.SetMemoRelations:output_type -> google.protobuf.Empty
+	19, // 62: memos.api.MemoService.ListMemoComments:output_type -> memos.api.ListMemoCommentsResponse
+	2,  // 63: memos.api.MemoService.CreateMemoComment:output_type -> memos.api.Memo
+	23, // 64: memos.api.MemoService.ListMemoReactions:output_type -> memos.api.ListMemoReactionsResponse
+	42, // 65: memos.api.MemoService.DeleteMemoReaction:output_type -> google.protobuf.Empty
+	21, // 66: memos.api.MemoService.UpsertMemoReaction:output_type -> memos.api.Reaction
+	28, // 67: memos.api.MemoService.ListMemoShares:output_type -> memos.api.ListMemoSharesResponse
+	26, // 68: memos.api.MemoService.CreateMemoShare:output_type -> memos.api.MemoShare
+	42, // 69: memos.api.MemoService.DeleteMemoShare:output_type -> google.protobuf.Empty
+	2,  // 70: memos.api.MemoService.GetSharedMemo:output_type -> memos.api.Memo
+	32, // 71: memos.api.MemoService.GetLinkMetadata:output_type -> memos.api.LinkMetadata
+	35, // 72: memos.api.MemoService.BatchGetLinkMetadata:output_type -> memos.api.BatchGetLinkMetadataResponse
+	52, // [52:73] is the sub-list for method output_type
+	31, // [31:52] is the sub-list for method input_type
 	31, // [31:31] is the sub-list for extension type_name
 	31, // [31:31] is the sub-list for extension extendee
 	0,  // [0:31] is the sub-list for field type_name
@@ -2746,14 +2820,14 @@ func file_api_memo_service_proto_init() {
 	file_api_attachment_service_proto_init()
 	file_api_common_proto_init()
 	file_api_memo_service_proto_msgTypes[0].OneofWrappers = []any{}
-	file_api_memo_service_proto_msgTypes[23].OneofWrappers = []any{}
+	file_api_memo_service_proto_msgTypes[24].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_memo_service_proto_rawDesc), len(file_api_memo_service_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   35,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
